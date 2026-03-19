@@ -1,0 +1,9 @@
+{% if son_sorular %}
+    <ul>
+    {% for soru in son_sorular %}
+        <li><a href="{% url 'anketler:detay' soru.id %}">{{ soru.soru_metni }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Henüz bir anket yayınlanmamış (Part 3).</p>
+{% endif %}
