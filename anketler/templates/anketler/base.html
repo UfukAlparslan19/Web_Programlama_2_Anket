@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}🚀 FormMaster | Profesyonel Anket Platformu{% endblock %}</title>
+    
+    <!-- Google Fonts: Inter & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Statik CSS -->
+    <link rel="stylesheet" href="{% static 'anketler/css/style.css' %}">
+</head>
+<body>
+    <div id="bg-pattern"></div>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'anketler:index' %}" class="logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span>FormMaster</span>
+            </a>
+            <div class="nav-links">
+                <a href="/admin/" class="nav-admin-btn"><i class="fas fa-user-shield"></i> Yönetim</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-info-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <strong>FormMaster</strong>. Tüm Hakları Saklıdır.</p>
+                <div class="social-links">
+                    <i class="fab fa-github"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-linkedin"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

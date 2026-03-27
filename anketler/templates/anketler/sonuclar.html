@@ -1,0 +1,46 @@
+{% extends "anketler/base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5" style="max-width: 800px;">
+    <div class="text-center mb-5">
+        <h1 style="font-weight: 800; color: #0f172a;">{{ anket.baslik }} - Sonuçlar</h1>
+        <p class="text-muted">Bu ankete ait tüm soru bazlı sonuçlar aşağıdadır.</p>
+        <div style="height: 4px; width: 50px; background: #10b981; margin: 1rem auto; border-radius: 2px;"></div>
+    </div>
+
+    {% for soru in anket.sorular.all %}
+        <div class="card shadow-sm border-0 rounded-4 mb-4" style="background: white; overflow: hidden;">
+            <div class="card-header bg-white border-0 pt-4 px-4">
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #1e293b;">
+                    <span style="color: #10b981;">Q{{ forloop.counter }}.</span> {{ soru.soru_metni }}
+                </h3>
+            </div>
+            <div class="card-body px-4 pb-4">
+                {% for secenek in soru.secenekler.all %}
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span style="font-weight: 500; color: #475569;">{{ secenek.secenek_metni }}</span>
+                            <span class="badge bg-light text-dark border">{{ secenek.oy_sayisi }} Oy</span>
+                        </div>
+                        <div class="progress" style="height: 10px; border-radius: 5px; background-color: #f1f5f9;">
+                            <div class="progress-bar" role="progressbar" 
+                                 style="width: {{ secenek.oy_sayisi }}%; background-color: #10b981; border-radius: 5px;" 
+                                 aria-valuenow="{{ secenek.oy_sayisi }}" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="text-center mt-5">
+        <a href="{% url 'anketler:index' %}" class="btn btn-outline-secondary px-4 py-2 rounded-3" style="font-weight: 600;">
+            <i class="fas fa-home me-2"></i> Ana Sayfaya Dön
+        </a>
+        <a href="{% url 'anketler:detay' anket.id %}" class="btn btn-success px-4 py-2 rounded-3 ms-3" style="font-weight: 600; background-color: #10b981; border: none;">
+            <i class="fas fa-redo me-2"></i> Yeniden Oyla
+        </a>
+    </div>
+</div>
+{% endblock %}
