@@ -1,0 +1,81 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --accent: #10b981;
+    --bg-base: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-soft: #64748b;
+    --radius: 1.25rem;
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg-base); 
+    color: var(--text-main); 
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Dinamik Arka Plan */
+.bg-gradient {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 0% 0%, #e0e7ff 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #fef3c7 0%, transparent 50%);
+    z-index: -3;
+}
+.bg-blob, .bg-blob-2 {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    z-index: -2; animation: float 20s infinite alternate;
+}
+.bg-blob { top: -100px; right: -100px; }
+.bg-blob-2 { bottom: -100px; left: -100px; animation-delay: -5s; }
+
+@keyframes float { from { transform: translate(0, 0); } to { transform: translate(50px, 100px); } }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Navbar - Glassmorphism */
+.glass-nav { 
+    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); padding: 1.5rem 0; 
+    position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.brand { font-family: 'Poppins', sans-serif; text-decoration: none; color: var(--primary-dark); font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 0.75rem; }
+.brand-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3); }
+.admin-link { text-decoration: none; font-weight: 600; padding: 0.6rem 1.25rem; border-radius: 10px; border: 1.5px solid var(--primary); color: var(--primary-dark); transition: 0.3s; }
+.admin-link:hover { background: var(--primary); color: white; transform: scale(1.05); }
+
+/* Main Section */
+.main-content { padding: 3rem 0; }
+
+/* Anket Kartları */
+.survey-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.survey-card { 
+    background: var(--card-bg); backdrop-filter: blur(8px);
+    border-radius: var(--radius); padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); transition: 0.4s var(--transition);
+    text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between;
+}
+.survey-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border-color: var(--primary-light); }
+
+.card-top { display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
+.badge-new { background: var(--accent); color: white; font-size: 0.75rem; padding: 0.3rem 0.7rem; border-radius: 8px; font-weight: 700; }
+
+.survey-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.3rem; margin-bottom: 2rem; }
+
+.card-bottom { display: flex; justify-content: space-between; align-items: center; color: var(--text-soft); font-size: 0.9rem; }
+.vote-label { font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+
+/* Toasts / Mesajlar */
+.toast-container { position: fixed; top: 100px; right: 2rem; z-index: 2000; width: 320px; }
+.toast { background: white; padding: 1.25rem; border-radius: 14px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-left: 5px solid var(--accent); animation: slideIn 0.5s ease; display: flex; align-items: center; gap: 1rem; }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* Footer */
+.footer { text-align: center; padding: 4rem 0; color: var(--text-soft); }
